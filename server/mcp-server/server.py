@@ -7,7 +7,7 @@ PORT = int(os.environ.get("MCP_PORT", "3456"))
 SESSION_ID = str(uuid.uuid4())
 
 def netease_request(url, data=None):
-    headers = {'User-Agent': 'Mozilla/5.0', 'Referer': 'https://music.163.com/', 'Cookie': NETEASE_COOKIE, 'Content-Type': 'application/x-www-form-urlencoded' if data else 'application/json'}
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'Referer': 'https://music.163.com/', 'Origin': 'https://music.163.com', 'Cookie': NETEASE_COOKIE, 'Content-Type': 'application/x-www-form-urlencoded' if data else 'application/json', 'X-Real-IP': '116.25.146.177'}
     if data and isinstance(data, dict):
         data = urllib.parse.urlencode(data).encode()
     elif data and isinstance(data, str):
