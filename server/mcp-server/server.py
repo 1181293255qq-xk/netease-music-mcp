@@ -20,11 +20,17 @@ def netease_request(url, data=None):
         return {"code": -1, "error": str(e)}
 
 def get_uid():
+    uid = os.environ.get("NETEASE_UID", "")
+    if uid:
+        return uid
     resp = netease_request('https://music.163.com/api/user/account/get')
     try:
-        return resp.get('profile', {}).get('userId') or resp.get('account', {}).get('id')
+        uid = resp.get('profile', {}).get('userId') or resp.get('account', {}).get('id')
+        if uid:
+            return uid
+        return "DEBUG: " + json.dumps(resp, ensure_ascii=False)[:500]
     except:
-        return None
+        return "DEBUG_ERROR: " + json.dumps(resp, ensure_ascii=False)[:500]
 
 def get_csrf():
     for part in NETEASE_COOKIE.split(';'):
