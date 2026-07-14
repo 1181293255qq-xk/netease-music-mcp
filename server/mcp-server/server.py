@@ -20,7 +20,7 @@ def netease_request(url, data=None):
         return {"code": -1, "error": str(e)}
 
 def get_uid():
-    resp = netease_request('https://music.163.com/api/nuser/account/get')
+    resp = netease_request('https://music.163.com/api/user/account/get')
     try:
         return resp.get('profile', {}).get('userId') or resp.get('account', {}).get('id')
     except:
